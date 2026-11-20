@@ -2,7 +2,7 @@
 <html lang="tr">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-41vkHTOBjUSOQxjaEc888sUcOTw/Qpw6RQO5pKlKNek=' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' https://api.anthropic.com https://www.googleapis.com https://oauth2.googleapis.com https://accounts.google.com/gsi/; frame-src https://accounts.google.com/gsi/; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'sha256-41vkHTOBjUSOQxjaEc888sUcOTw/Qpw6RQO5pKlKNek=' 'sha256-zI78md8fpgLhueNDCj9s8IciiUcD/2oRd0HVNW5XDdU=' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://accounts.google.com/gsi/style; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' https://api.anthropic.com https://www.googleapis.com https://oauth2.googleapis.com https://accounts.google.com/gsi/; frame-src https://accounts.google.com/gsi/; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>KPSS Kokpit</title>
     <meta name="description" content="Kendi PDF kaynaklarından beslenen, yapay zekâ destekli KPSS çalışma uygulaması." />
@@ -27,11 +27,35 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="./assets/index-C2pOKALF.js"></script>
+    <script type="module" crossorigin src="./assets/index-DwJmp7qb.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-XKyaHtl9.js">
+    <link rel="modulepreload" crossorigin href="./assets/answerKey-DXJznbO-.js">
+    <link rel="modulepreload" crossorigin href="./assets/fsrs-C3H69CwP.js">
+    <link rel="modulepreload" crossorigin href="./assets/hooks-DRPpSCpn.js">
     <link rel="modulepreload" crossorigin href="./assets/error-wJ5RwKpd.js">
-    <link rel="stylesheet" crossorigin href="./assets/index-DViNiEEg.css">
+    <link rel="modulepreload" crossorigin href="./assets/sync-interval-BScnobTX.js">
+    <link rel="modulepreload" crossorigin href="./assets/client-D7bEAtdX.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod--BOmkLnc.js">
+    <link rel="modulepreload" crossorigin href="./assets/pdf-rHNF8m-n.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-DCATtVRb.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Uygulama dosyaları yüklenemezse (internetsiz ve henüz cihaza inmemiş) beyaz ekran yerine ileti
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          var r = document.getElementById("root");
+          if (!r || r.firstChild) return;
+          r.innerHTML =
+            '<div style="max-width:28rem;margin:15vh max(1rem, calc(50% - 14rem));padding:1.25rem;font:15px/1.6 system-ui,sans-serif;border:1px solid #8884;border-radius:12px">' +
+            "<p style=\"font-weight:600;margin:0 0 .5rem\">KPSS Kokpit açılamadı</p>" +
+            '<p style="margin:0 0 1rem">Uygulamanın dosyaları bu cihaza henüz tam inmemiş. İnternete bağlanıp uygulamayı bir kez aç; dosyalar indikten sonra internetsiz de açılır. Verilerin cihazında duruyor.</p>' +
+            '<button id="kokpit-retry" style="font:inherit;padding:.5rem 1rem;border-radius:8px;border:0;background:#3b5bdb;color:#fff">Yeniden dene</button></div>';
+          var b = document.getElementById("kokpit-retry");
+          if (b) b.addEventListener("click", function () { location.reload(); });
+        }, 2500);
+      });
+    </script>
   </body>
 </html>

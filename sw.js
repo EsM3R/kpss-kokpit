@@ -2,63 +2,115 @@
    __VERSION__ (derleme zamanı + içerik özeti) ve __PRECACHE__ (derlenen dosyalar) doldurulur.
 
    - Kurulumda uygulamanın bütün dosyaları indirilir: ilk açılıştan sonra internetsiz de tamamen çalışır
-     (bütün ekranlar, PDF okuyucu, yazı tipleri).
+     (bütün ekranlar, PDF okuyucu, yazı tipleri). İndirme bitince "tamam" işareti yazılır; işaret yoksa
+     (yarıda kaldıysa ya da tarayıcı bir kısmını sildiyse) uygulama her açılışta eksikleri tamamlar.
    - Uygulama her zaman önbellekten açılır (anında). Yeni sürüm yayınlanınca arka planda indirilir ve
      ekranda "Yenile" uyarısı çıkar; kullanıcı dokununca geçilir. Çalışırken uygulama değişmez.
-   - Bir önceki sürümün dosyaları da saklanır: açık kalmış eski bir pencere çalışmaya devam eder.
+   - Bir önceki etkin sürümün dosyaları saklanır (açık kalmış eski pencere çalışır). Daha yeni, inmekte
+     olan bir sürümün dosyalarına hiç dokunulmaz.
    - Veriler (kitaplar, notlar, kartlar) IndexedDB'dedir; burada değil. Yapay zekâ ve Google istekleri
      hiçbir zaman önbelleğe alınmaz.
    - Aynı alan adındaki (esm3r.github.io) başka sitelerin önbelleklerine dokunulmaz. */
-const VERSION = "0mwnn3o8a-40f0a449d8";
-const PRECACHE = ["./","./apple-touch-icon.png","./assets/Analiz-DkBcSP0h.js","./assets/Ayarlar-94TB2nLT.js","./assets/Cizelge-gy4h2UnZ.js","./assets/Deneme-vZm7nzPt.js","./assets/Harita-Cwb4Tz0S.js","./assets/InkCanvas-BktofU0U.js","./assets/InkPad-DKPcelXN.js","./assets/InkToolbar-DBrj5Iah.js","./assets/Kokpit-Bj5sQOpZ.js","./assets/Konu-D5_d5rsw.js","./assets/Kutuphane-DxjjrMy6.js","./assets/Plan-C6NWyHG-.js","./assets/Sheet-BnuG5owk.js","./assets/Soru-hxDKzs1p.js","./assets/Tekrar-BxbDwQWp.js","./assets/TodayPlan-BLCy2XVN.js","./assets/Yanlis-DC3idA3I.js","./assets/arrow-left-BFUrkhwL.js","./assets/arrow-up-52sxiSpU.js","./assets/ayarlar-XaxWHUf-.js","./assets/caveat-latin-ext-wght-normal-Byk3UhVp.woff2","./assets/caveat-latin-wght-normal-C1hSzPvX.woff2","./assets/charts-4OcQGGP_.js","./assets/check-DX9iK5sW.js","./assets/chevron-down-C-qcnG_7.js","./assets/chevron-left-B0d2BaUO.js","./assets/chevron-right-B3rPGh_x.js","./assets/circle-slash-CBokVa_s.js","./assets/clock-CuEb7ZIm.js","./assets/controls-D9Xd7vqL.js","./assets/download-BwP0XdVj.js","./assets/error-wJ5RwKpd.js","./assets/eye-glwIB-1F.js","./assets/file-text-Brhp1cc8.js","./assets/flag-B04t1vxg.js","./assets/flask-conical-Mmk4pz0Y.js","./assets/index-C2pOKALF.js","./assets/index-DViNiEEg.css","./assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2","./assets/inter-latin-wght-normal-Dx4kXJAl.woff2","./assets/jetbrains-mono-latin-ext-wght-normal-DBQx-q_a.woff2","./assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2","./assets/keyboard-Cj-1hN8G.js","./assets/layers-BdHYdKw7.js","./assets/list-checks-IcQ1b-V4.js","./assets/loader-circle-DZi9KYk3.js","./assets/lock-BaIk2EZn.js","./assets/map-pin-IP_1oZko.js","./assets/minus-bB8c5MdI.js","./assets/model-S3-_D54k.js","./assets/node.browser-CGfFuoKj.js","./assets/node.browser-D2uSVCJC.js","./assets/pdf.worker.min-CIqJB0yW.mjs","./assets/pen-CZMd08s-.js","./assets/play-BAWY839h.js","./assets/plus-DnMLQQaL.js","./assets/process-EzVRB7r-.js","./assets/rotate-ccw-DRVeCneA.js","./assets/scan-line-BIOoCpKF.js","./assets/shared-C3MSMUKE.js","./assets/shield-check-jOjp0hM-.js","./assets/shuffle-C_VCbFml.js","./assets/space-grotesk-latin-ext-wght-normal-D9tNdqV9.woff2","./assets/space-grotesk-latin-wght-normal-BhU9QXUp.woff2","./assets/sparkles-DDCvJjrf.js","./assets/sunrise-DcvyWqb8.js","./assets/table-2-Dx-jbEjV.js","./assets/tablet-B7THSHL5.js","./assets/tekrar-DBe64JmJ.js","./assets/trash-8hMW7Gvf.js","./assets/triangle-exclamation-point-Cxq_V-aG.js","./assets/ui-m7HXwQXz.js","./assets/wifi-off-Bb-f7FHM.js","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./index.html","./manifest.webmanifest","./pdfjs/iccs/CGATS001Compat-v2-micro.icc","./pdfjs/standard_fonts/FoxitDingbats.pfb","./pdfjs/standard_fonts/FoxitFixed.pfb","./pdfjs/standard_fonts/FoxitFixedBold.pfb","./pdfjs/standard_fonts/FoxitFixedBoldItalic.pfb","./pdfjs/standard_fonts/FoxitFixedItalic.pfb","./pdfjs/standard_fonts/FoxitSerif.pfb","./pdfjs/standard_fonts/FoxitSerifBold.pfb","./pdfjs/standard_fonts/FoxitSerifBoldItalic.pfb","./pdfjs/standard_fonts/FoxitSerifItalic.pfb","./pdfjs/standard_fonts/FoxitSymbol.pfb","./pdfjs/standard_fonts/LiberationSans-Bold.ttf","./pdfjs/standard_fonts/LiberationSans-BoldItalic.ttf","./pdfjs/standard_fonts/LiberationSans-Italic.ttf","./pdfjs/standard_fonts/LiberationSans-Regular.ttf","./pdfjs/wasm/jbig2.wasm","./pdfjs/wasm/openjpeg.wasm","./pdfjs/wasm/qcms_bg.wasm"];
+const VERSION = "0mwozlucd-a2fcd41085";
+const PRECACHE = ["./","./apple-touch-icon.png","./assets/Analiz-BNeaO7ib.js","./assets/Ayarlar-C8RORi9b.js","./assets/Cizelge-CL4qCU4W.js","./assets/Deneme-Dt0ZBDFc.js","./assets/ExtractPanel-BMJbQMAT.js","./assets/Harita-D3UIQgEs.js","./assets/InkCanvas-CSOrG9v_.js","./assets/InkPad-BoOLLXRE.js","./assets/InkToolbar-HQOOizf6.js","./assets/Kokpit-D_zLhgOX.js","./assets/Konu-DB8c_XV-.js","./assets/Kutuphane-Cu1wui6m.js","./assets/Plan-D0BMAtxc.js","./assets/Sheet-CkCH6_DQ.js","./assets/Soru-n5HJK4zO.js","./assets/Tekrar-BU4_JfCt.js","./assets/Yanlis-BZdgJWJN.js","./assets/ai-BonG4hp0.js","./assets/answerKey-DXJznbO-.js","./assets/arrow-left-PHhA-qnV.js","./assets/charts-DXmer3T4.js","./assets/check-s068YQqS.js","./assets/chevron-down-CCye0DpG.js","./assets/chevron-left-loTE7trD.js","./assets/chevron-right-D2M_gSLC.js","./assets/circle-exclamation-point-KY7k_CLZ.js","./assets/circle-slash-DnK8IDMT.js","./assets/client-D7bEAtdX.js","./assets/clock-CQAKz6bk.js","./assets/controls-D8krcBD8.js","./assets/data-Be9rQb6B.js","./assets/data-Bl4ddbNv.js","./assets/data-BtYKCutQ.js","./assets/download-CfCsW3nc.js","./assets/error-wJ5RwKpd.js","./assets/eye-C-y4wyN4.js","./assets/file-up-BzatWyrh.js","./assets/flag-C2dMCDPx.js","./assets/fsrs-C3H69CwP.js","./assets/hooks-DRPpSCpn.js","./assets/image-Ci1shs3e.js","./assets/index-DCATtVRb.css","./assets/index-DwJmp7qb.js","./assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2","./assets/inter-latin-wght-normal-Dx4kXJAl.woff2","./assets/jetbrains-mono-latin-ext-wght-normal-DBQx-q_a.woff2","./assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2","./assets/key-round-CFErAtYs.js","./assets/keyboard-BaEmQ6Na.js","./assets/layers-BA8kxVyf.js","./assets/list-checks-yvupcKFW.js","./assets/loader-circle-CB8Am5mD.js","./assets/map-pin-DICU3TuG.js","./assets/model-DKYyrIUj.js","./assets/node.browser-CGfFuoKj.js","./assets/node.browser-D-8W00wD.js","./assets/pause-CX03aD1o.js","./assets/pdf-rHNF8m-n.js","./assets/pdf.worker.min-CIqJB0yW.mjs","./assets/play-7plSVVMb.js","./assets/plus-Cr91qzgf.js","./assets/process-DA0iuKvB.js","./assets/reuse-jq8Ur_f3.js","./assets/rolldown-runtime-XKyaHtl9.js","./assets/rotate-ccw-grKupqFM.js","./assets/scan-line-C8GJoUaS.js","./assets/search-x-BY1GZf4p.js","./assets/shared-BqYTJLBA.js","./assets/shield-check-BJlqij3d.js","./assets/shuffle-PocqqjzH.js","./assets/space-grotesk-latin-ext-wght-normal-D9tNdqV9.woff2","./assets/space-grotesk-latin-wght-normal-BhU9QXUp.woff2","./assets/sparkles-BJ9nUoT0.js","./assets/square-D5cUR_x0.js","./assets/strategy-BUWPxRKy.js","./assets/sync-interval-BScnobTX.js","./assets/table-2-u1Cm5AJJ.js","./assets/tablet-DxCWfIZ1.js","./assets/touch-SteojCvm.js","./assets/trash-C-eZJ1zZ.js","./assets/triangle-exclamation-point-NYcQIc2Y.js","./assets/ui-2Lje2lWD.js","./assets/useLibrary-CYQNWiuZ.js","./assets/wifi-off-sgp_175o.js","./assets/zod--BOmkLnc.js","./icon-192.png","./icon-512.png","./icon-maskable-512.png","./index.html","./manifest.webmanifest","./pdfjs/6.5.438/iccs/CGATS001Compat-v2-micro.icc","./pdfjs/6.5.438/standard_fonts/FoxitDingbats.pfb","./pdfjs/6.5.438/standard_fonts/FoxitFixed.pfb","./pdfjs/6.5.438/standard_fonts/FoxitFixedBold.pfb","./pdfjs/6.5.438/standard_fonts/FoxitFixedBoldItalic.pfb","./pdfjs/6.5.438/standard_fonts/FoxitFixedItalic.pfb","./pdfjs/6.5.438/standard_fonts/FoxitSerif.pfb","./pdfjs/6.5.438/standard_fonts/FoxitSerifBold.pfb","./pdfjs/6.5.438/standard_fonts/FoxitSerifBoldItalic.pfb","./pdfjs/6.5.438/standard_fonts/FoxitSerifItalic.pfb","./pdfjs/6.5.438/standard_fonts/FoxitSymbol.pfb","./pdfjs/6.5.438/standard_fonts/LiberationSans-Bold.ttf","./pdfjs/6.5.438/standard_fonts/LiberationSans-BoldItalic.ttf","./pdfjs/6.5.438/standard_fonts/LiberationSans-Italic.ttf","./pdfjs/6.5.438/standard_fonts/LiberationSans-Regular.ttf","./pdfjs/6.5.438/wasm/jbig2.wasm","./pdfjs/6.5.438/wasm/openjpeg.wasm","./pdfjs/6.5.438/wasm/qcms_bg.wasm"];
 const PREFIX = "kokpit:" + self.registration.scope + ":";
 const APP = PREFIX + "app-";
 const CACHE = APP + VERSION;
-/** Önbelleğe baştan alınmayan, değişmeyen ek dosyalar (ör. PDF.js karakter eşlemeleri) */
+/** Önbelleğe baştan alınmayan, değişmeyen ek dosyalar (ör. PDF.js karakter eşlemeleri, nadir yazı tipi alt kümeleri) */
 const RUNTIME = PREFIX + "runtime";
+/** Etkin sürümün adı (bir önceki sürümü doğru saklamak için) */
+const META = PREFIX + "meta";
+const DONE = "./__precache-tamam__";
 const SCOPE_PATH = new URL(self.registration.scope).pathname;
+const PRECACHE_URLS = new Set(PRECACHE.map((u) => new URL(u, self.registration.scope).href));
+/** Adı ya da yolu içeriğe bağlı, hiç değişmeyen dosyalar: eski sürümden kopyalanabilir, HTTP önbelleği güvenli */
+const immutable = (url) => url.includes("/assets/") || url.includes("/pdfjs/");
 
-/** Bütün dosyaları indirir. Adı içerik özeti taşıyan dosyalar (assets/) eski sürümde varsa oradan
-    kopyalanır; güncellemede yalnızca değişenler iner (telefonda veri tasarrufu). */
+/** Önbellek tam mı: "tamam" işareti VE bütün dosyalar (işaret yalnız başına yeterli sayılmaz) */
+async function complete(cache) {
+  return !!(await cache.match(DONE)) && (await cache.keys()).length >= PRECACHE.length + 1;
+}
+
+/** Bütün dosyaları indirir (var olanları atlar; yarıda kaldıysa kaldığı yerden sürer). Bitince "tamam" işareti. */
 async function precache() {
   const cache = await caches.open(CACHE);
+  if (await complete(cache)) return;
   const older = (await caches.keys()).filter((k) => k.startsWith(APP) && k !== CACHE);
   await Promise.all(
     PRECACHE.map(async (u) => {
       const url = new URL(u, self.registration.scope).href;
       if (await cache.match(url)) return;
-      if (url.includes("/assets/")) {
+      if (immutable(url)) {
         for (const k of older) {
           const hit = await (await caches.open(k)).match(url);
           if (hit) return cache.put(url, hit);
         }
       }
-      // HTTP önbelleğini atla: eski bir dosya yeni sürüme karışmasın
-      const res = await fetch(new Request(url, { cache: "reload" }));
+      // Değişebilen dosyalar (index.html, simgeler, bildirim dosyası) HTTP önbelleğini atlar
+      const res = await fetch(new Request(url, { cache: immutable(url) ? "default" : "reload" }));
       if (!res.ok) throw new Error(res.status + " " + url);
       await cache.put(url, res);
     }),
   );
+  await cache.put(DONE, new Response(VERSION));
+}
+
+let refilling = null;
+/** Önbellek eksikse arka planda tamamla (aynı anda bir kez) */
+function ensureComplete() {
+  if (!refilling)
+    refilling = precache()
+      .catch(() => {})
+      .finally(() => {
+        refilling = null;
+      });
+  return refilling;
 }
 
 self.addEventListener("install", (e) => {
-  // İlk kurulumda hemen devreye gir; güncellemede kullanıcının "Yenile"sini bekle
-  e.waitUntil(precache().then(() => (self.registration.active ? undefined : self.skipWaiting())));
+  e.waitUntil(
+    precache()
+      // Yarım kalan kurulum 6 MB'lık eksik önbellek bırakmasın
+      .catch(async (err) => {
+        await caches.delete(CACHE);
+        throw err;
+      })
+      // İlk kurulumda hemen devreye gir; güncellemede kullanıcının "Yenile"sini bekle
+      .then(() => (self.registration.active ? undefined : self.skipWaiting())),
+  );
 });
 
 self.addEventListener("message", (e) => {
-  if (e.data === "SKIP_WAITING") self.skipWaiting();
+  if (e.data !== "SKIP_WAITING") return;
+  // Zaten etkin olan sürüme gelen istek: eski sürümle açık kalmış bir sekme (ilk sürümün kodu). O sekmeyi
+  // yeni sürüme yenile; aksi halde bekleyen sürüm devreye girer.
+  const me = self.serviceWorker;
+  if (me && me.state === "activated" && e.source && "navigate" in e.source) e.source.navigate(e.source.url).catch(() => {});
+  else self.skipWaiting();
 });
 
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     (async () => {
+      const meta = await caches.open(META);
       const keys = await caches.keys();
-      // Bu sürüm ve bir önceki kalır (önbellek adları derleme zamanıyla sıralanır); daha eskiler silinir
-      const apps = keys.filter((k) => k.startsWith(APP) && k !== CACHE && k < CACHE).sort();
-      const keep = new Set([CACHE, RUNTIME, ...apps.slice(-1)]);
-      const drop = keys.filter((k) => k === "kokpit-v1" || (k.startsWith(PREFIX) && !keep.has(k)));
+      const rec = await (await meta.match("./active"))?.text();
+      const recPrev = await (await meta.match("./previous"))?.text();
+      // Önceki etkin sürüm: kayıt geçerliyse o. Aynı sürüm yeniden etkinleşiyorsa kayıtlı öncekisi.
+      // Kayıt yoksa ya da geçersizse (eski sürümden geçiş) bu seferlik bütün eski sürümler kalır; sonraki etkinleşme temizler.
+      const keepOld =
+        rec && rec !== CACHE && keys.includes(rec)
+          ? [rec]
+          : rec === CACHE && recPrev && keys.includes(recPrev)
+            ? [recPrev]
+            : keys.filter((k) => k.startsWith(APP) && k < CACHE);
+      // Kalır: bu sürüm, önceki etkin sürüm, ek dosyalar ve bu sürümden YENİ olanlar (inmekte olabilir).
+      // Silinir: daha eski sürümler, yarım kalmış kurulumlar ve ilk sürümün "kokpit-v1" önbelleği.
+      const keep = new Set([CACHE, RUNTIME, META, ...keepOld]);
+      const drop = keys.filter((k) => k === "kokpit-v1" || (k.startsWith(PREFIX) && !keep.has(k) && !(k.startsWith(APP) && k > CACHE)));
       await Promise.all(drop.map((k) => caches.delete(k)));
+      if (rec !== CACHE) await meta.put("./previous", new Response(keepOld.length === 1 ? keepOld[0] : ""));
+      await meta.put("./active", new Response(CACHE));
       await self.clients.claim();
     })(),
   );
@@ -68,7 +120,7 @@ self.addEventListener("activate", (e) => {
 async function fromCache(req) {
   const hit = await (await caches.open(CACHE)).match(req);
   if (hit) return hit;
-  for (const k of (await caches.keys()).filter((k) => k.startsWith(PREFIX) && k !== CACHE)) {
+  for (const k of (await caches.keys()).filter((k) => k.startsWith(PREFIX) && k !== CACHE && k !== META)) {
     const r = await (await caches.open(k)).match(req);
     if (r) return r;
   }
@@ -91,11 +143,11 @@ self.addEventListener("fetch", (e) => {
     const isShell = url.pathname === SCOPE_PATH || url.pathname === SCOPE_PATH + "index.html";
     e.respondWith(
       (async () => {
+        // Önbellek eksikse (yarıda kalmış indirme, tarayıcının sildiği dosyalar) arkada tamamla
+        if (!(await complete(await caches.open(CACHE)))) e.waitUntil(ensureComplete());
         if (isShell) {
           const hit = await shell();
           if (hit) return hit;
-          // Önbellek silinmiş (ör. tarayıcı yer açtı): ağdan aç ve arkada yeniden doldur
-          e.waitUntil(precache().catch(() => {}));
         }
         try {
           return await fetch(req);
@@ -112,10 +164,12 @@ self.addEventListener("fetch", (e) => {
       const hit = await fromCache(req);
       if (hit) return hit;
       const res = await fetch(req);
-      // Değişmeyen ek dosyalar ilk kullanımda saklanır (ör. pdfjs/cmaps)
-      if (res.ok && url.pathname.startsWith(SCOPE_PATH + "pdfjs/")) {
+      // Ağdan gelen uygulama dosyası saklanır: önbellekten düşmüşse geri konur, değişmeyen ek dosyalar
+      // (ör. pdfjs/cmaps, nadir yazı tipi alt kümeleri) ilk kullanımda saklanır
+      if (res.ok) {
         const copy = res.clone();
-        e.waitUntil(caches.open(RUNTIME).then((c) => c.put(req, copy)));
+        if (PRECACHE_URLS.has(url.href)) e.waitUntil(caches.open(CACHE).then((c) => c.put(req, copy)));
+        else if (immutable(url.href)) e.waitUntil(caches.open(RUNTIME).then((c) => c.put(req, copy)));
       }
       return res;
     })(),

@@ -17,10 +17,6 @@
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
     { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
-  "screenshots": [
-    { "src": "screenshot-wide.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide", "label": "Kokpit: günün planı ve sınava kalan gün (tablet, yatay)" },
-    { "src": "screenshot-narrow.png", "sizes": "824x1830", "type": "image/png", "form_factor": "narrow", "label": "Kokpit: günün planı (telefon)" }
-  ],
   "shortcuts": [
     { "name": "Tekrar", "short_name": "Tekrar", "description": "Bugünkü kartlar", "url": "./#/tekrar", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] },
     { "name": "Soru çöz", "short_name": "Soru", "description": "Süreli soru seti", "url": "./#/soru", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] },
