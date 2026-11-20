@@ -1,0 +1,1 @@
+import{K as e}from"./hooks-DkwJQn95.js";var t={name:`minus`,size:24,node:[[`path`,{d:`M5 12h14`,key:`1ays0h`}]]};t.node;var n=e(t),r={name:`square`,size:24,node:[[`rect`,{width:`18`,height:`18`,x:`3`,y:`3`,rx:`2`,key:`afitv7`}]]};r.node;var i=e(r);export{n,i as t};
